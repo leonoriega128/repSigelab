@@ -8,6 +8,7 @@ package sigelab;
 import VO.*;
 import DAO.*;
 import javax.swing.JOptionPane;
+import controlui.control;
 
 /**
  *
@@ -176,14 +177,20 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = jTextField1.getText();
+        String nombre = "";
+        control c = new control();
+        if (c.controlar(jTextField1.getText())) {
+            nombre = jTextField1.getText();
+        }else{
+            System.out.println("error");
+        }
         String apellido = jTextField2.getText();
         String leg = jTextField3.getText();
         String contra = jTextField4.getText();
         String rol = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
         String tel = jTextField6.getText();
         String correo = jTextField5.getText();
-        
+
         UsuarioVO u = new UsuarioVO();
         u.setNombre(nombre);
         u.setApellido(apellido);
@@ -193,10 +200,10 @@ public class Usuario extends javax.swing.JFrame {
         u.setTelefono(tel);
         u.setDireccion(correo);
         u.setEstadoU("Alta");
-        
+
         UsuarioDAO carga = new UsuarioDAO();
         carga.Agregar_UsuarioVO(u);
-        
+
         JOptionPane.showMessageDialog(this, "Usuario Cargado con exito!");
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

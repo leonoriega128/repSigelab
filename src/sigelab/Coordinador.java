@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import Conexion.Conectar;
+import com.toedter.calendar.JCalendar;
+import java.io.IOException;
 import javax.swing.ButtonGroup;
 
 /**
@@ -34,6 +36,7 @@ public class Coordinador extends javax.swing.JFrame {
         bgroup.add(jRadioButton2);
         jList2.setVisible(false);
         jRadioButton1.setSelected(true);
+        jDateChooser1.setVisible(false);
     }
     Date objDate = new Date();
     Conectar CC = new Conectar();
@@ -61,6 +64,7 @@ public class Coordinador extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -170,6 +174,17 @@ public class Coordinador extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jList2);
 
+        jCalendar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jCalendar1MouseReleased(evt);
+            }
+        });
+        jCalendar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendar1PropertyChange(evt);
+            }
+        });
+
         jMenu2.setText("File");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -254,78 +269,178 @@ public class Coordinador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButton1)
                                     .addComponent(jRadioButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(245, 245, 245)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(236, 236, 236)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(198, 198, 198)
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton3)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(180, 180, 180))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addGap(26, 26, 26)
+                                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addContainerGap())))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(616, 616, 616)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(32, Short.MAX_VALUE)))
+                    .addContainerGap(382, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jRadioButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCalendar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jRadioButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton3))))))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(213, 213, 213)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(213, Short.MAX_VALUE)))
+                    .addContainerGap(340, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
-        jLabel1.setText("Solicitudes mismo horario");
+//        jLabel1.setText("Solicitudes mismo horario");
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            for (int j = 1; j < jTable2.getColumnCount(); j++) {
+                jTable2.setValueAt("", i, j);
+            }
+        }
         if (jRadioButton1.isSelected()) {
             jButton1.setVisible(true);
             jButton2.setVisible(true);
             jButton3.setVisible(false);
+
+            int valor = 0;
+            String dia = "";
+            int convertir = 0;
+            ArrayList M = new ArrayList();
+            MateriaDAO m = new MateriaDAO();
+            M = m.Listar_MateriaVO();
+
+            ArrayList E = new ArrayList();
+            SolicitudlabDAO sl = new SolicitudlabDAO();
+            E = sl.Listar_SolicitudlabVO();
+
+            jButton1.setVisible(true);
+            jButton2.setVisible(true);
+            jButton3.setVisible(false);
+
+            jDateChooser1.setDate(objDate);
+            Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
+            Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
+            dia = Character.toString(d) + Character.toString(i);
+
+            valor = jDateChooser1.getDate().getDay();
+            String convert = "";
+
+            boolean b = false;
+            String horaTabla = "";
+
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay() + 1;
+            for (int z = 0; z < 5; z++) {
+                b = false;
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
+
+                    if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+                        String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                        horaTabla = "";
+                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        if (suma < 10) {
+                            convert = "0" + suma + ":" + "00";
+                        } else {
+                            convert = suma + ":" + "00";
+                        }
+
+                        for (int k = 0; k < 2; k++) {
+                            if (hora.charAt(k) != ':') {
+                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                b = true;
+                            }
+                        }
+
+                        convertir = Integer.parseInt(horaTabla) - 8;
+
+                        if (b) {
+                            for (int k = 0; k < M.size(); k++) {
+                                if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, jCalendar1.getCalendar().getTime().getDay() + z - 1);
+
+                                }
+                            }
+                            b = false;
+                        }
+
+                    }
+                }
+
+                System.out.println(diaup);
+                diaup++;
+//                    }
+//
+//                    break;
+//                case 3:
+//                    break;
+//                case 4:
+//                    break;
+//                case 5:
+//                    break;
+//                case 6:
+//                    break;
+//            }
+
+            }
         }
+
+
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -388,16 +503,36 @@ public class Coordinador extends javax.swing.JFrame {
         int row = jTable2.getSelectedRow();
         int col = jTable2.getSelectedColumn();
         ArrayList E = new ArrayList();
+        ArrayList M = new ArrayList();
         SolicitudlabDAO sl = new SolicitudlabDAO();
         E = sl.Listar_SolicitudlabVO();
-//        Connection conn = CC.getConexion();
+        SolicitudlabVO svo = new SolicitudlabVO();
+
+//      Connection conn = CC.getConexion();
         jList2.setSelectedIndex(jList1.getSelectedIndex());
 //        PreparedStatement ps = null;
         System.out.println(jTable2.isRowSelected(row));
         if (jTable2.isRowSelected(row)) {
             for (int i = 0; i < E.size(); i++) {
+                if (Integer.toString(((SolicitudlabVO) E.get(i)).getCodSolicitud()).equalsIgnoreCase(jList2.getSelectedValue())) {
+                    svo.setCodSolicitud(((SolicitudlabVO) E.get(i)).getCodSolicitud());
+                    svo.setCodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                    svo.setDni(((SolicitudlabVO) E.get(i)).getDni());
+                    svo.setLegajo(((SolicitudlabVO) E.get(i)).getLegajo());
+                    svo.setTipoReserva(((SolicitudlabVO) E.get(i)).getTipoReserva());
+                    svo.setFecha(((SolicitudlabVO) E.get(i)).getFecha());
+                    svo.setHora(((SolicitudlabVO) E.get(i)).getHora());
+                    svo.setEstadoSol("aprobado");
+                    svo.setLaboratorio_CodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                    svo.setMateria_codMat(((SolicitudlabVO) E.get(i)).getMateria_codMat());
+                    svo.setDocente_idDocente(((SolicitudlabVO) E.get(i)).getDocente_idDocente());
+                    svo.setHoraFin(((SolicitudlabVO) E.get(i)).getHoraFin());
 
+                    sl.Modificar_SolicitudlabVO(svo);
+                }
             }
+            jList1.removeAll();
+            jList2.removeAll();
 //     try {
 //                ps = conn.prepareStatement("Update solicitud SET solEstado='Aprobado' where idSolicitud=" + jList2.getSelectedValue());
 //                ps.executeUpdate();
@@ -412,95 +547,217 @@ public class Coordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        int row = jTable2.getSelectedRow();
-//        int col = jTable2.getSelectedColumn();
+        int row = jTable2.getSelectedRow();
+        int col = jTable2.getSelectedColumn();
+        ArrayList E = new ArrayList();
+        ArrayList M = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        E = sl.Listar_SolicitudlabVO();
+        SolicitudlabVO svo = new SolicitudlabVO();
 //
 //        Connection conn = CC.getConexion();
-//        jList2.setSelectedIndex(jList1.getSelectedIndex());
+        jList2.setSelectedIndex(jList1.getSelectedIndex());
 //        System.out.println(jList2.getSelectedValue());
 //        PreparedStatement ps = null;
-//        if (jTable2.isRowSelected(row)) {
-//            int i = JOptionPane.showConfirmDialog(null, "Desea rechazar esta solicitud?", "", JOptionPane.YES_NO_OPTION);
-//            if (i == 0) {
-//                JOptionPane.showMessageDialog(null, "Solicitud rechazada", "", JOptionPane.INFORMATION_MESSAGE);
-//                try {
-//                    ps = conn.prepareStatement("Update solicitud SET solEstado='Rechazado' where idSolicitud=" + jList2.getSelectedValue());
-//                    ps.executeUpdate();
-//                } catch (Exception e) {
-//
-//                }
-//            }
-//        }
+        if (jTable2.isRowSelected(row)) {
+            int j = JOptionPane.showConfirmDialog(null, "Desea rechazar esta solicitud?", "", JOptionPane.YES_NO_OPTION);
+            if (j == 0) {
+                JOptionPane.showMessageDialog(null, "Solicitud rechazada", "", JOptionPane.INFORMATION_MESSAGE);
 
+                if (jTable2.isRowSelected(row)) {
+                    for (int i = 0; i < E.size(); i++) {
+                        if (Integer.toString(((SolicitudlabVO) E.get(i)).getCodSolicitud()).equalsIgnoreCase(jList2.getSelectedValue())) {
+                            svo.setCodSolicitud(((SolicitudlabVO) E.get(i)).getCodSolicitud());
+                            svo.setCodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                            svo.setDni(((SolicitudlabVO) E.get(i)).getDni());
+                            svo.setLegajo(((SolicitudlabVO) E.get(i)).getLegajo());
+                            svo.setTipoReserva(((SolicitudlabVO) E.get(i)).getTipoReserva());
+                            svo.setFecha(((SolicitudlabVO) E.get(i)).getFecha());
+                            svo.setHora(((SolicitudlabVO) E.get(i)).getHora());
+                            svo.setEstadoSol("rechazado");
+                            svo.setLaboratorio_CodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                            svo.setMateria_codMat(((SolicitudlabVO) E.get(i)).getMateria_codMat());
+                            svo.setDocente_idDocente(((SolicitudlabVO) E.get(i)).getDocente_idDocente());
+                            svo.setHoraFin(((SolicitudlabVO) E.get(i)).getHoraFin());
+
+                            sl.Modificar_SolicitudlabVO(svo);
+                        }
+                    }
+                    jList1.removeAll();
+                    jList2.removeAll();
+
+                }
+
+//        }
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
         jLabel1.setText("");
+        String convert = "";
+        ArrayList E = new ArrayList();
+        ArrayList M = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        MateriaDAO svo = new MateriaDAO();
+        E = sl.Listar_SolicitudlabVO();
+        M = svo.Listar_MateriaVO();
+
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            for (int j = 1; j < jTable2.getColumnCount(); j++) {
+                jTable2.setValueAt(null, i, j);
+            }
+        }
+
         if (jRadioButton2.isSelected()) {
             jButton1.setVisible(false);
             jButton2.setVisible(false);
             jButton3.setVisible(true);
+            int convertir = 0;
+            int columna = 0;
+            String horaTabla = "";
+            boolean b = false;
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            //System.out.println(diaup);
+            for (int z = 0; z < 5; z++) {
+                b = false;
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
+                    System.out.println(DiaBdd + "::" + diaup);
+                    if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+
+                        String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                        horaTabla = "";
+                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        if (suma < 10) {
+                            convert = "0" + suma + ":" + "00";
+                        } else {
+                            convert = suma + ":" + "00";
+                        }
+
+                        for (int k = 0; k < 2; k++) {
+                            if (hora.charAt(k) != ':') {
+                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                b = true;
+                            }
+                        }
+                        convertir = Integer.parseInt(horaTabla) - 8;
+                        columna = Integer.parseInt(DiaBdd) - diaup + z;
+                        if (b) {
+                            for (int k = 0; k < M.size(); k++) {
+                                if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+
+                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                }
+                            }
+                            b = false;
+                        }
+                    }
+                }
+                diaup++;
+            }
         }
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
 
-        ArrayList M = new ArrayList();
-        MateriaDAO m = new MateriaDAO();
-        M = m.Listar_MateriaVO();
-        String materia = "";
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            for (int j = 1; j < jTable2.getColumnCount(); j++) {
-                jTable2.setValueAt("", i, j);
-            }
-        }
-        DefaultListModel modelo = new DefaultListModel();
-        DefaultListModel modelo2 = new DefaultListModel();
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            for (int j = 1; j < jTable2.getColumnCount(); j++) {
-                jTable2.setValueAt("", i, j);
-            }
-        }
-        jDateChooser1.setDate(objDate);
-        Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
-        Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
-        String dia = Character.toString(d) + Character.toString(i);
-
-        String valor = Integer.toString(jDateChooser1.getDate().getDay());
-
-        System.out.println("El dia es : " + valor);
-
-        ArrayList E = new ArrayList();
-        SolicitudlabDAO sl = new SolicitudlabDAO();
-        E = sl.Listar_SolicitudlabVO();
-
-        for (int j = 0; j < E.size(); j++) {
-            if ((((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado"))) {
-                int convertir = 0;
-                String horaTabla = "";
-                String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
-                horaTabla = "";
-                System.out.println("La hora es :" + hora);
-                for (int k = 0; k < 2; k++) {
-                    if (hora.charAt(k) != ':') {
-                        horaTabla = horaTabla + Character.toString(hora.charAt(k));
-                    }
-                }
-                System.out.println(horaTabla);
-                convertir = Integer.parseInt(horaTabla) - 5;
-                System.out.println("asd" + convertir);
-                for (int k = 0; k < M.size(); k++) {
-                    if (((MateriaVO) M.get(k)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
-                        materia = ((MateriaVO) M.get(k)).getNombre();
-                    }
-                    jTable2.setValueAt(materia, convertir, jDateChooser1.getDate().getDay());
-                }
-            }
-        }
+//        ArrayList M = new ArrayList();
+//        MateriaDAO m = new MateriaDAO();
+//        M = m.Listar_MateriaVO();
+//        String materia = "";
+//        DefaultListModel modelo = new DefaultListModel();
+//        DefaultListModel modelo2 = new DefaultListModel();
+//        for (int i = 0; i < jTable2.getRowCount(); i++) {
+//            for (int j = 1; j < jTable2.getColumnCount(); j++) {
+//                jTable2.setValueAt("", i, j);
+//            }
+//        }
+//        jDateChooser1.setDate(objDate);
+//        Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
+//        Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
+//        String dia = Character.toString(d) + Character.toString(i);
+//
+//        String valor = Integer.toString(jDateChooser1.getDate().getDay());
+//
+//        System.out.println("El dia es : " + valor);
+//
+//        ArrayList E = new ArrayList();
+//        SolicitudlabDAO sl = new SolicitudlabDAO();
+//        E = sl.Listar_SolicitudlabVO();
+//
+//        for (int j = 0; j < E.size(); j++) {
+//            if ((((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado"))) {
+//                int convertir = 0;
+//                String horaTabla = "";
+//                String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
+//                horaTabla = "";
+//                System.out.println("La hora es :" + hora);
+//                for (int k = 0; k < 2; k++) {
+//                    if (hora.charAt(k) != ':') {
+//                        horaTabla = horaTabla + Character.toString(hora.charAt(k));
+//                    }
+//                }
+//                System.out.println(horaTabla);
+//                convertir = Integer.parseInt(horaTabla) - 5;
+//                System.out.println("asd" + convertir);
+//                for (int k = 0; k < M.size(); k++) {
+//                    if (((MateriaVO) M.get(k)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
+//                        materia = ((MateriaVO) M.get(k)).getNombre();
+//                    }
+//                    jTable2.setValueAt(materia, convertir, jDateChooser1.getDate().getDay());
+//                }
+//            }
+//        }
 
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        int row = jTable2.getSelectedRow();
+        int col = jTable2.getSelectedColumn();
+        ArrayList E = new ArrayList();
+        ArrayList M = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        E = sl.Listar_SolicitudlabVO();
+        SolicitudlabVO svo = new SolicitudlabVO();
+//
+//        Connection conn = CC.getConexion();
+        jList2.setSelectedIndex(jList1.getSelectedIndex());
+//        System.out.println(jList2.getSelectedValue());
+//        PreparedStatement ps = null;
+        if (jTable2.isRowSelected(row)) {
+            int j = JOptionPane.showConfirmDialog(null, "Desea Cancelar esta Reserva?", "", JOptionPane.YES_NO_OPTION);
+            if (j == 0) {
+                JOptionPane.showMessageDialog(null, "Reserva cancelada", "", JOptionPane.INFORMATION_MESSAGE);
+
+                if (jTable2.isRowSelected(row)) {
+                    for (int i = 0; i < E.size(); i++) {
+                        if (Integer.toString(((SolicitudlabVO) E.get(i)).getCodSolicitud()).equalsIgnoreCase(jList2.getSelectedValue())) {
+                            svo.setCodSolicitud(((SolicitudlabVO) E.get(i)).getCodSolicitud());
+                            svo.setCodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                            svo.setDni(((SolicitudlabVO) E.get(i)).getDni());
+                            svo.setLegajo(((SolicitudlabVO) E.get(i)).getLegajo());
+                            svo.setTipoReserva(((SolicitudlabVO) E.get(i)).getTipoReserva());
+                            svo.setFecha(((SolicitudlabVO) E.get(i)).getFecha());
+                            svo.setHora(((SolicitudlabVO) E.get(i)).getHora());
+                            svo.setEstadoSol("cancelado");
+                            svo.setLaboratorio_CodLab(((SolicitudlabVO) E.get(i)).getLaboratorio_CodLab());
+                            svo.setMateria_codMat(((SolicitudlabVO) E.get(i)).getMateria_codMat());
+                            svo.setDocente_idDocente(((SolicitudlabVO) E.get(i)).getDocente_idDocente());
+                            svo.setHoraFin(((SolicitudlabVO) E.get(i)).getHoraFin());
+
+                            sl.Modificar_SolicitudlabVO(svo);
+                        }
+                    }
+                    jList1.removeAll();
+                    jList2.removeAll();
+
+                }
+
+//        }
+            }
+        }
+
 //        int row = jTable2.getSelectedRow();
 //        int col = jTable2.getSelectedColumn();
 //
@@ -558,10 +815,8 @@ public class Coordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-
-    }//GEN-LAST:event_jTable2MousePressed
-
-    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        jList1.removeAll();
+        jList2.removeAll();
         String convert;
         DefaultListModel modelo = new DefaultListModel();
         DefaultListModel modelo2 = new DefaultListModel();
@@ -569,6 +824,16 @@ public class Coordinador extends javax.swing.JFrame {
         ArrayList E = new ArrayList();
         SolicitudlabDAO sl = new SolicitudlabDAO();
         E = sl.Listar_SolicitudlabVO();
+
+        jDateChooser1.setDate(objDate);
+        Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
+        Character z = String.valueOf(jDateChooser1.getDate()).charAt(9);
+        String dia = Character.toString(d) + Character.toString(z);
+        int aux2 = 0;
+        int jtabla = 0;
+        aux2 = Integer.parseInt(dia) + jCalendar1.getDate().getDay();
+        dia = Integer.toString(aux2);
+        //System.out.println("fecha de la base: " + dia);
 
         ArrayList M = new ArrayList();
         MateriaDAO ml = new MateriaDAO();
@@ -579,9 +844,71 @@ public class Coordinador extends javax.swing.JFrame {
         if (jTable2.isRowSelected(row)) {
 
             if (jRadioButton1.isSelected()) {
+                jList1.removeAll();
+                jList2.removeAll();
+                jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
 
                 for (int j = 0; j < E.size(); j++) {
-                    if ((((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente"))) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
+                    if (DiaBdd.charAt(0) == '0') {
+                        DiaBdd = Character.toString(DiaBdd.charAt(1));
+                    }
+                    if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
+
+                        int convertir = 0;
+                        String horaTabla = "";
+                        int columna = 0;
+                        String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
+                        horaTabla = "";
+                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+
+                        if (suma < 10) {
+                            convert = "0" + suma + ":" + "00";
+                        } else {
+                            convert = suma + ":" + "00";
+                        }
+
+                        for (int k = 0; k < 2; k++) {
+                            if (convert.charAt(k) != ':') {
+                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                            }
+                        }
+                        convertir = Integer.parseInt(horaTabla) - 8;
+                        //  columna = DiaBdd - jtabla + z
+                        if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
+                            if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
+
+                                for (int i = 0; i < M.size(); i++) {
+                                    try {
+                                        if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
+                                            modelo.addElement(((MateriaVO) M.get(i)).getNombre());
+                                            modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
+                                            j++;
+                                        }
+                                    } catch (IndexOutOfBoundsException e) {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                jList2.setModel(modelo2);
+
+                jList1.setModel(modelo);
+
+            }
+            if (jRadioButton2.isSelected()) {
+                jList2.removeAll();
+                jList1.removeAll();
+                jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+                for (int j = 0; j < E.size(); j++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
+                    if (DiaBdd.charAt(0) == '0') {
+                        DiaBdd = Character.toString(DiaBdd.charAt(1));
+                    }
+
+                    if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
                         int convertir = 0;
                         String horaTabla = "";
                         String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
@@ -594,110 +921,40 @@ public class Coordinador extends javax.swing.JFrame {
                             convert = suma + ":" + "00";
                         }
 
-                        //          System.out.println("La hora es :" + convert);
                         for (int k = 0; k < 2; k++) {
                             if (convert.charAt(k) != ':') {
                                 horaTabla = horaTabla + Character.toString(convert.charAt(k));
                             }
                         }
-                        // System.out.println("hora tabla 10am " + horaTabla);
                         convertir = Integer.parseInt(horaTabla) - 8;
 
-                        if (Integer.toString(convertir).equalsIgnoreCase(String.valueOf(jTable2.getValueAt(row, 0)))) {
-                            for (int i = 0; i < M.size(); i++) {
-                                if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
-                                    modelo.addElement(((MateriaVO) M.get(i)).getNombre());
-                                    modelo2.addElement("idSolicitud");
-                                }
-                            }
-                        }
-                    }
-                }
-                jList1.setModel(modelo);
-                jList2.setModel(modelo2);
-//                        if (convert.charAt(0) == '0') {
-//                            convert = Character.toString(convert.charAt(1)) + Character.toString(convert.charAt(2)) + Character.toString(convert.charAt(3)) + Character.toString(convert.charAt(4));
-//                        }
-//                        if (convert.equalsIgnoreCase(String.valueOf(jTable2.getValueAt(row, 0)))) {
-//
-//                            modelo.addElement(rs.getString("Materia"));
-//                            modelo2.addElement(rs.getString("idSolicitud"));
-//                        }
-//                    }
-//                    jList1.setModel(modelo);
-//                    jList2.setModel(modelo2);
-//                }
-                if (jRadioButton2.isSelected()) {
-                    for (int j = 0; j < E.size(); j++) {
-                        if ((((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado"))) {
-                            //int convertir = 0;
-                            String horaTabla = "";
-                            String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
-                            horaTabla = "";
-                            int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
+                            if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
 
-                            if (suma < 10) {
-                                convert = "0" + suma + ":" + "00";
-                            } else {
-                                convert = suma + ":" + "00";
-                            }
-                            //   System.out.println("La hora es :" + convert);
-
-                            for (int k = 0; k < 2; k++) {
-                                if (convert.charAt(k) != ':') {
-                                    horaTabla = horaTabla + Character.toString(convert.charAt(k));
-                                }
-                            }
-                            int convertir = Integer.parseInt(horaTabla) - 5;
-                            // System.out.println("Estoy entrando a la lista");                        
-                            if (Integer.toString(convertir).equalsIgnoreCase(String.valueOf(jTable2.getValueAt(row, 0)))) {
                                 for (int i = 0; i < M.size(); i++) {
-                                    if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
-                                        modelo.addElement(((MateriaVO) M.get(i)).getNombre());
-                                        modelo2.addElement("idSolicitud");
+                                    try {
+                                        if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
+                                            modelo.addElement(((MateriaVO) M.get(i)).getNombre());
+                                            System.out.println("cod de solicitud : " + ((SolicitudlabVO) E.get(j)).getCodSolicitud());
+                                            modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
+                                            j++;
+                                        }
+                                    } catch (IndexOutOfBoundsException e) {
+
                                     }
                                 }
                             }
                         }
                     }
-                    jList1.setModel(modelo);
-                    jList2.setModel(modelo2);
-
                 }
-//                    PreparedStatement ps = null;
-//                    ResultSet rs = null;
-//                    Connection con = CC.getConexion();
-//
-//                    String sql = "SELECT * FROM solicitud WHERE solEstado = 'Aprobado' ";
-//                    ps = con.prepareStatement(sql);
-//                    rs = ps.executeQuery();
-//                    while (rs.next()) {
-//                        String hora = rs.getString("solFechayHora");
-//                        String convert = Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1)) + ":" + "00";
-//                        if (convert.charAt(0) == '0') {
-//                            convert = Character.toString(convert.charAt(1)) + Character.toString(convert.charAt(2)) + Character.toString(convert.charAt(3)) + Character.toString(convert.charAt(4));
-//                        }
-//                        if (convert.equalsIgnoreCase(String.valueOf(jTable2.getValueAt(row, 0)))) {
-//                            modelo.addElement(rs.getString("Materia"));
-//                            modelo2.addElement(rs.getString("idSolicitud"));
-//                        }
-//                    }
-//                    jList1.setModel(modelo);
-//                    jList2.setModel(modelo2);
-//                }
-//            } catch (Exception e) {
-//
-//            }
-//        }
-                //
-                //        System.out.println("inicio :" + inicio);
-                //        String convertedToString = String.valueOf(jTable2.getValueAt(inicio, 0));
-                //        jTextField2.setText((convertedToString));
-                //        convertedToString = String.valueOf(jTable2.getValueAt(seleccionados.length + inicio, 0));
-                //        jTextField1.setText(convertedToString);
-                //          }
+                jList2.setModel(modelo2);
+                jList1.setModel(modelo);
             }
         }
+    }//GEN-LAST:event_jTable2MousePressed
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+
     }//GEN-LAST:event_jTable2MouseReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -837,7 +1094,10 @@ public class Coordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        System.exit(1);
+        this.setVisible(false);
+        Sigelab1 sg = new Sigelab1();
+        sg.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -851,7 +1111,7 @@ public class Coordinador extends javax.swing.JFrame {
     private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
         Usuario u = new Usuario();
         u.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem5MouseClicked
 
     private void jMenuItem5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MousePressed
@@ -867,7 +1127,9 @@ public class Coordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        String valor = "";
+        //jRadioButton1.setSelected(false);
+        // jRadioButton2.setSelected(true);
+        int valor = 0;
         String dia = "";
         int convertir = 0;
         ArrayList M = new ArrayList();
@@ -882,105 +1144,368 @@ public class Coordinador extends javax.swing.JFrame {
         jButton2.setVisible(true);
         jButton3.setVisible(false);
 
+        String horaTabla = "";
+        boolean b = false;
+
         jDateChooser1.setDate(objDate);
         Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
         Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
         dia = Character.toString(d) + Character.toString(i);
-        System.out.println("fecha de la base: " + dia);
 
-        valor = Integer.toString(jDateChooser1.getDate().getDay());
-
+        valor = jDateChooser1.getDate().getDay();
         String convert = "";
         if (jRadioButton1.isSelected()) {
             jButton1.setVisible(true);
             jButton2.setVisible(true);
             jButton3.setVisible(false);
 
-            String horaTabla = "";
-            boolean b = false;
-            for (int j = 0; j < E.size(); j++) {
-                System.out.println("La fecha es :" + ((SolicitudlabVO) E.get(j)).getFecha());
-                String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
-                System.out.println("la fecha convertida es: " + DiaBdd);
-                //if (((SolicitudlabVO) E.get(j)).getFecha().equalsIgnoreCase("pendiente")) {
-                if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(dia)) {
-                    String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();
-                    horaTabla = "";
-                    int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
-                    if (suma < 10) {
-                        convert = "0" + suma + ":" + "00";
-                    } else {
-                        convert = suma + ":" + "00";
-                    }
-
-                    for (int k = 0; k < 2; k++) {
-                        if (hora.charAt(k) != ':') {
-                            horaTabla = horaTabla + Character.toString(convert.charAt(k));
-                            b = true;
-                        }
-                    }
-
-                    convertir = Integer.parseInt(horaTabla) - 8;
-
-                    //  System.out.println("la hora de la tabla es: " + horaTabla);
-                    if (b) {
-                        for (int k = 0; k < M.size(); k++) {
-                            if (((SolicitudlabVO) E.get(j)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
-                                jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, jDateChooser1.getDate().getDay());
-                            }
-                        }
-                        b = false;
-                        System.out.println(horaTabla);
-                        // convertir = Integer.parseInt(horaTabla) - 5;
-
-                        //              System.out.println("hora convertida es " + horaTabla);
-                    }
-                    //  }
-                }
-            }
-
-            if (jRadioButton2.isSelected()) {
-                jButton1.setVisible(false);
-                jButton2.setVisible(false);
-                jButton3.setVisible(true);
-
-                convertir = 0;
-                horaTabla = "";
+            int columna = 0;
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            for (int z = 0; z < 5; z++) {
                 b = false;
-                for (int j = 0; j < E.size(); j++) {
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
 
-                    if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado")) {
-                        Object h = ((SolicitudlabVO) E.get(j)).getHora();
-                        String hora = String.valueOf(h);
+                    if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+                        String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
                         horaTabla = "";
+                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        if (suma < 10) {
+                            convert = "0" + suma + ":" + "00";
+                        } else {
+                            convert = suma + ":" + "00";
+                        }
+
                         for (int k = 0; k < 2; k++) {
                             if (hora.charAt(k) != ':') {
-                                horaTabla = horaTabla + Character.toString(hora.charAt(k));
+                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
                                 b = true;
                             }
                         }
+                        convertir = Integer.parseInt(horaTabla) - 8;
+                        columna = Integer.parseInt(DiaBdd) - diaup + z;
                         if (b) {
                             for (int k = 0; k < M.size(); k++) {
-                                if (((SolicitudlabVO) E.get(j)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
-                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, 1);
+                                if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
                                 }
                             }
+                            b = false;
                         }
-                        b = false;
-                        System.out.println(horaTabla);
-                        convertir = Integer.parseInt(horaTabla) - 5;
-
-                        //            System.out.println("hora convertida es " + horaTabla);
                     }
                 }
+
+                System.out.println(diaup);
+                diaup++;
+            }
+        }
+        if (jRadioButton2.isSelected()) {
+            jButton1.setVisible(false);
+            jButton2.setVisible(false);
+            jButton3.setVisible(true);
+
+            convertir = 0;
+            horaTabla = "";
+            int columna = 0;
+            b = false;
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            for (int z = 0; z < 5; z++) {
+                b = false;
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
+
+                    if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+                        String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                        horaTabla = "";
+                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        if (suma < 10) {
+                            convert = "0" + suma + ":" + "00";
+                        } else {
+                            convert = suma + ":" + "00";
+                        }
+
+                        for (int k = 0; k < 2; k++) {
+                            if (hora.charAt(k) != ':') {
+                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                b = true;
+                            }
+                        }
+                        convertir = Integer.parseInt(horaTabla) - 8;
+                        columna = Integer.parseInt(DiaBdd) - diaup + z;
+                        if (b) {
+                            for (int k = 0; k < M.size(); k++) {
+                                if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                }
+                            }
+                            b = false;
+                        }
+                    }
+                }
+                diaup++;
             }
         }
     }//GEN-LAST:event_formWindowActivated
+
+    public boolean obtenerDia(String convertido) {
+        int dia = jCalendar1.getCalendar().getTime().getDate();
+        boolean b = false;
+        System.out.println("posicion en la tabla" + jCalendar1.getCalendar().getTime().getDay());
+
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        ArrayList C = new ArrayList();
+        C = sl.Listar_SolicitudlabVO();
+
+        // convertido = Character.toString(convertido.charAt(8)) + (convertido.charAt(9));
+        if (dia == Integer.parseInt(convertido)) {
+            b = true;
+        }
+
+        //}
+        //System.out.println("dia obtenido de la base de datos" + convertido);
+        if (dia == Integer.parseInt(convertido)) {
+            b = true;
+        }
+
+        return b;
+    }
+
+    public int obtenerMes() {
+        int mes = jCalendar1.getCalendar().getTime().getMonth() + 1;
+        return mes;
+
+    }
+
+    public int obtenerAnio() {
+        int anio = jCalendar1.getCalendar().getWeekYear();//esto es para obtener el año
+        return anio;
+    }
+
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         Usuario u = new Usuario();
         u.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jCalendar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseReleased
+
+    }//GEN-LAST:event_jCalendar1MouseReleased
+
+    private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendar1PropertyChange
+
+        int valor = 0;
+        String dia = "";
+        int convertir = 0;
+        ArrayList M = new ArrayList();
+        MateriaDAO m = new MateriaDAO();
+        M = m.Listar_MateriaVO();
+
+        ArrayList E = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        E = sl.Listar_SolicitudlabVO();
+
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(false);
+
+        String horaTabla = "";
+        boolean b = false;
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            for (int j = 1; j < jTable2.getColumnCount(); j++) {
+                jTable2.setValueAt(null, i, j);
+            }
+        }
+        jDateChooser1.setDate(objDate);
+        Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
+        Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
+        dia = Character.toString(d) + Character.toString(i);
+
+        valor = jDateChooser1.getDate().getDay();
+        String convert = "";
+        if (jRadioButton1.isSelected()) {
+            jButton1.setVisible(true);
+            jButton2.setVisible(true);
+            jButton3.setVisible(false);
+
+            int columna = 0;
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            for (int z = 0; z < 5; z++) {
+                b = false;
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
+                    if (DiaBdd.charAt(0) == '0') {
+                        DiaBdd = Character.toString(DiaBdd.charAt(1));
+                    }
+                    String mesBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(5)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(6);
+                    if (mesBdd.charAt(0) == '0') {
+                        mesBdd = Character.toString(mesBdd.charAt(1));
+                    }
+                    if (obtenerMes() == Integer.parseInt(mesBdd)) {
+                        if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+                            String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                            horaTabla = "";
+                            int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                            if (suma < 10) {
+                                convert = "0" + suma + ":" + "00";
+                            } else {
+                                convert = suma + ":" + "00";
+                            }
+
+                            for (int k = 0; k < 2; k++) {
+                                if (hora.charAt(k) != ':') {
+                                    horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                    b = true;
+                                }
+                            }
+                            convertir = Integer.parseInt(horaTabla) - 8;
+                            columna = Integer.parseInt(DiaBdd) - diaup + z;
+                            if (b) {
+                                for (int k = 0; k < M.size(); k++) {
+                                    if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+                                        jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                    }
+                                }
+                                b = false;
+                            }
+                        }
+                    }
+                }
+
+                System.out.println(diaup);
+                diaup++;
+            }
+        }
+        if (jRadioButton2.isSelected()) {
+            jButton1.setVisible(false);
+            jButton2.setVisible(false);
+            jButton3.setVisible(true);
+
+            convertir = 0;
+            horaTabla = "";
+            int columna = 0;
+            b = false;
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            for (int z = 0; z < 5; z++) {
+                b = false;
+                for (int aux = 0; aux < E.size(); aux++) {
+                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
+                    if (DiaBdd.charAt(0) == '0') {
+                        DiaBdd = Character.toString(DiaBdd.charAt(1));
+                    }
+                    String mesBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(5)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(6);
+                    if (mesBdd.charAt(0) == '0') {
+                        mesBdd = Character.toString(mesBdd.charAt(1));
+                    }
+                    if (obtenerMes() == Integer.parseInt(mesBdd)) {
+                        if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
+                            String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                            horaTabla = "";
+                            int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                            if (suma < 10) {
+                                convert = "0" + suma + ":" + "00";
+                            } else {
+                                convert = suma + ":" + "00";
+                            }
+
+                            for (int k = 0; k < 2; k++) {
+                                if (hora.charAt(k) != ':') {
+                                    horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                    b = true;
+                                }
+                            }
+                            convertir = Integer.parseInt(horaTabla) - 8;
+                            columna = Integer.parseInt(DiaBdd) - diaup + z;
+                            if (b) {
+                                for (int k = 0; k < M.size(); k++) {
+                                    if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+                                        jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                    }
+                                }
+                                b = false;
+                            }
+                        }
+                    }
+                }
+                diaup++;
+            }
+        }
+
+//        String valor = "";
+//        String dia = "";
+//        int convertir = 0;
+//        ArrayList M = new ArrayList();
+//        MateriaDAO m = new MateriaDAO();
+//        M = m.Listar_MateriaVO();
+//        
+//        ArrayList E = new ArrayList();
+//        SolicitudlabDAO sl = new SolicitudlabDAO();
+//        E = sl.Listar_SolicitudlabVO();
+//        
+//        jButton1.setVisible(true);
+//        jButton2.setVisible(true);
+//        jButton3.setVisible(false);
+//        
+//        System.out.println("Este es del jcalendar" + jCalendar1.getDate().getDate());
+//        jDateChooser1.setDate(objDate);
+//        Character d = String.valueOf(jDateChooser1.getDate()).charAt(8);
+//        Character i = String.valueOf(jDateChooser1.getDate()).charAt(9);
+//        dia = Character.toString(d) + Character.toString(i);
+//        System.out.println("fecha de la base: " + dia);
+//        
+//        valor = Integer.toString(jDateChooser1.getDate().getDay());
+//        
+//        String convert = "";
+//        if (jRadioButton1.isSelected()) {
+//            jButton1.setVisible(true);
+//            jButton2.setVisible(true);
+//            jButton3.setVisible(false);
+//            
+//            String horaTabla = "";
+//            boolean b = false;
+//            for (int j = 0; j < E.size(); j++) {
+//                //     System.out.println("La fecha es :" + ((SolicitudlabVO) E.get(j)).getFecha());
+//                String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
+//                //       System.out.println("la fecha convertida es: " + DiaBdd);
+//                //if (((SolicitudlabVO) E.get(j)).getFecha().equalsIgnoreCase("pendiente")) {
+//
+//                //DiaBdd.equalsIgnoreCase(dia)
+//                System.out.println(DiaBdd);
+//                if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente") && obtenerDia(DiaBdd)) {
+//                    String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();
+//                    horaTabla = "";
+//                    int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+//                    if (suma < 10) {
+//                        convert = "0" + suma + ":" + "00";
+//                    } else {
+//                        convert = suma + ":" + "00";
+//                    }
+//                    
+//                    for (int k = 0; k < 2; k++) {
+//                        if (hora.charAt(k) != ':') {
+//                            horaTabla = horaTabla + Character.toString(convert.charAt(k));
+//                            b = true;
+//                        }
+//                    }
+//                    
+//                    convertir = Integer.parseInt(horaTabla) - 8;
+//
+//                    //  System.out.println("la hora de la tabla es: " + horaTabla);
+//                    if (b) {
+//                        for (int k = 0; k < M.size(); k++) {
+//                            if (((SolicitudlabVO) E.get(j)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
+//                                jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, jDateChooser1.getDate().getDay());
+//                            }
+//                        }
+//                        b = false;
+//                        System.out.println(horaTabla);
+//                        // convertir = Integer.parseInt(horaTabla) - 5;
+//
+//                        //              System.out.println("hora convertida es " + horaTabla);
+//                    }
+//                }
+//            }   //  }
+//        }
+    }//GEN-LAST:event_jCalendar1PropertyChange
 
     /**
      * @param args the command line arguments
@@ -1021,6 +1546,7 @@ public class Coordinador extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;

@@ -16,6 +16,7 @@ import VO.DocenteVO;
 import DAO.DocenteDAO;
 import DAO.*;
 import VO.*;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -141,6 +142,21 @@ public class Docente extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        jCalendar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCalendar1MouseClicked(evt);
+            }
+        });
+        jCalendar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendar1PropertyChange(evt);
+            }
+        });
+        jCalendar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCalendar1KeyPressed(evt);
+            }
+        });
 
         jLabel4.setText("Solicitud de reserva");
 
@@ -148,6 +164,11 @@ public class Docente extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -254,7 +275,7 @@ public class Docente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
@@ -335,72 +356,92 @@ public class Docente extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         UsuarioDAO u = new UsuarioDAO();
-        ArrayList E = new ArrayList();
-
         for (int i = 0; i < jTable2.getRowCount(); i++) {
             jTable2.setValueAt(null, i, 1);
         }
-        try {
 
-//            PreparedStatement ps = null;
-//            ResultSet rs = null;
-            //           Connection con = CC.getConexion();
-            String sql = "SELECT * FROM usuario WHERE LegajoU = '" + Legajo + "'";
-            //   ps = con.prepareStatement(sql);
-            //  rs = ps.executeQuery();
-            //   while (rs.next()) {
-            jLabel5.setText("Has iniciado sesion como: " + ((UsuarioVO) (E.get(1))).getNombre() + " " + ((UsuarioVO) (E.get(1))).getApellido());
-            // }
-        } catch (Exception e) {
-        }
-        String valor = Integer.toString(jCalendar1.getDayChooser().getDay());
+        ArrayList E = new ArrayList();
+        MateriaDAO dc = new MateriaDAO();
+        E = dc.Listar_MateriaVO();
 
-        String mes = Integer.toString(jCalendar1.getMonthChooser().getMonth() + 1);
-        if (mes.length() < 2) {
-            mes = "0" + mes;
-        }
-        if (valor.length() == 1) {
-            valor = "0" + valor;
+        ArrayList C = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        C = sl.Listar_SolicitudlabVO();
+
+        //jComboBox1.addItem("Seleccionar materia");
+        for (int i = 0; i < E.size(); i++) {
+            if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
+                jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
+            }
         }
 
-        try {
-            String sql = "SELECT solFechayHora, solEstado, Materia FROM solicitud WHERE solFechaSolic like '%" + mes + "-" + valor + "%' ";
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-            int convertir = 0;
-            String horaTabla = "";
-//            while (rs.next()) {
-//                if (rs.getString("solEstado").equalsIgnoreCase("Aprobado")) {
-//                    String hora = rs.getString("solFechayHora");
-//                    System.out.println("horaaa: " + hora);
-//                    horaTabla = "";
-//                    for (int k = 0; k < 2; k++) {
-//                        if (hora.charAt(k) != ':') {
-//                            horaTabla = horaTabla + Character.toString(hora.charAt(k));
-//                        }
-//                    }
-//                    convertir = Integer.parseInt(horaTabla) - 8;
-//                    jTable2.setValueAt(rs.getString("Materia"), convertir, 1);
-//                }
-//            }
+        for (int i = 0; i < C.size(); i++) {
+            if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
+                if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
 
-        } catch (Exception e) {
-
+                    //System.out.println("de la lista " + ((SolicitudlabVO) C.get(i)).getHora());
+                    String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
+                    int hora = convertirHora(horaInicio);
+                    for (int j = 0; j < E.size(); j++) {
+                        if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
+                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
+                        }
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
+    public boolean obtenerDia(String convertido) {
+        int dia = jCalendar1.getCalendar().getTime().getDate();
+        boolean b = false;
+        // System.out.println("dia de la modularidad" + convertido);
+        //  String convertido = "";
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        ArrayList C = new ArrayList();
+        C = sl.Listar_SolicitudlabVO();
+        // for (int i = 0; i < C.size(); i++) {
+        convertido = Character.toString(convertido.charAt(8)) + (convertido.charAt(9));
+        //convertido = Character.toString(((SolicitudlabVO) C.get(i)).getFecha().charAt(8)) + Character.toString(((SolicitudlabVO) C.get(i)).getFecha().charAt(9));
+        if (dia == Integer.parseInt(convertido)) {
+            b = true;
+        }
+
+        //}
+        //System.out.println("dia obtenido de la base de datos" + convertido);
+        if (dia == Integer.parseInt(convertido)) {
+            b = true;
+        }
+
+        return b;
+    }
+
+    public int obtenerMes() {
+        int mes = jCalendar1.getCalendar().getTime().getMonth() + 1;
+        return mes;
+
+    }
+
+    public int obtenerAnio() {
+        int anio = jCalendar1.getCalendar().getWeekYear();//esto es para obtener el año
+        return anio;
+    }
+
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        System.out.println(jCalendar1.getDate().toString());
-        System.out.println("Dia actual: " + objDate.getDay());
-        System.out.println("Mes actual: " + objDate.getMonth());
+
+        SolicitudlabDAO SolcLab = new SolicitudlabDAO();
+        SolicitudlabVO slvo = new SolicitudlabVO();
+        MateriaDAO M = new MateriaDAO();
+        ArrayList a = new ArrayList();
+        a = M.Listar_MateriaVO();
         int anio = objDate.getYear() + 1900;
         boolean v = false;
         int mes = jCalendar1.getMonthChooser().getMonth() + 1;
         int c = JOptionPane.showConfirmDialog(null, "Desea solicitar reserva?", "Advertencia", JOptionPane.YES_NO_OPTION);
-
+        boolean b = false;
         for (int x = 0; x < cantidadHorasSolc; x++) {
             String valor = Integer.toString(anio) + "-" + mes + "-" + Integer.toString(jCalendar1.getDayChooser().getDay());
-            System.out.println("compilado: " + valor);
+            //      System.out.println("compilado: " + valor);
             String hora = "0";
             String horafin = "0";
             for (int i = 0; i < 13; i++) {
@@ -410,7 +451,7 @@ public class Docente extends javax.swing.JFrame {
                 }
             }
             String fechaSolc = valor;
-            System.out.println(hora);
+            // System.out.println(hora);
             int[] columnass = jTable2.getSelectedColumns();
             String tipoRe = "";
             if (jRadioButton1.isSelected()) {
@@ -418,15 +459,18 @@ public class Docente extends javax.swing.JFrame {
             } else {
                 tipoRe = "Ayudantia";
             }
-            System.out.println(String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1)));
+            // System.out.println(String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1)));
 
             if (jTable2.getValueAt(jTable2.getSelectedRow(), 1) == null || String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1)).equalsIgnoreCase("")) {
                 if (c == 0) {
-                    //CC.insertarSolic(fechaSolc, fechaSolc, "Pendiente", fechaSolc, jTextField3.getText(), Legajo);
-                    SolicitudlabDAO SolcLab = new SolicitudlabDAO();
-                    SolicitudlabVO slvo = new SolicitudlabVO();
+
                     MateriaVO mat = new MateriaVO();
-                    slvo.setCodLab(jComboBoxLab.getSelectedIndex() + 1);
+                    for (int i = 0; i < a.size(); i++) {
+                        if (jComboBox1.getSelectedItem().toString().equalsIgnoreCase(((MateriaVO) a.get(i)).getNombre())) {
+                            System.out.println("entra ahi");
+                            slvo.setMateria_codMat((((MateriaVO) a.get(i)).getCodMat()));
+                        }
+                    }
                     slvo.setDni(Integer.parseInt(dni));
                     slvo.setLegajo(Legajo);
                     slvo.setTipoReserva("curricular");
@@ -435,17 +479,9 @@ public class Docente extends javax.swing.JFrame {
                     slvo.setEstadoSol("pendiente");
                     slvo.setLaboratorio_CodLab(1 + jComboBoxLab.getSelectedIndex());
 
-//                    while (v == false) {
-//                        if (jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).equalsIgnoreCase(mat.getNombre())) {
-//                            slvo.setMateria_codMat(mat.getCodMat());
-//                            v = true;
-//                        }
-//                    }
-                    slvo.setMateria_codMat(jComboBox1.getSelectedIndex() + 1);
-                    //se debe hacer una consulta a la bdd para obtener el codigo de materia
                     slvo.setDocente_idDocente(Integer.parseInt(id));
                     slvo.setHoraFin(horafin);
-                    SolcLab.Agregar_SolicitudlabVO(slvo);
+                    b = true;
                 } else {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar una materia", "Advertencia",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -454,8 +490,9 @@ public class Docente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Horario no disponible", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        if (c == 0) {
-
+        if (b == true) {
+            SolcLab.Agregar_SolicitudlabVO(slvo);
+            jComboBoxLab.removeAllItems();
         }
         JOptionPane.showMessageDialog(null, "Solicitud enviada con exito", " ", JOptionPane.INFORMATION_MESSAGE);
 
@@ -502,17 +539,131 @@ public class Docente extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLabMouseReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        jComboBox1.removeAllItems();
         ArrayList E = new ArrayList();
         MateriaDAO dc = new MateriaDAO();
         E = dc.Listar_MateriaVO();
+
+        ArrayList C = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        C = sl.Listar_SolicitudlabVO();
+
         //jComboBox1.addItem("Seleccionar materia");
         for (int i = 0; i < E.size(); i++) {
             if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
                 jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
             }
         }
-        
+
+        for (int i = 0; i < C.size(); i++) {
+            if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
+                if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
+                    String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
+                    int hora = convertirHora(horaInicio);
+                    for (int j = 0; j < E.size(); j++) {
+                        if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
+                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_formWindowActivated
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
+        jButton1MouseClicked(evt);
+    }//GEN-LAST:event_jCalendar1MouseClicked
+
+    private void jCalendar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCalendar1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCalendar1KeyPressed
+
+    private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendar1PropertyChange
+        UsuarioDAO u = new UsuarioDAO();
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            jTable2.setValueAt(null, i, 1);
+        }
+
+        ArrayList E = new ArrayList();
+        MateriaDAO dc = new MateriaDAO();
+        E = dc.Listar_MateriaVO();
+
+        ArrayList C = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        C = sl.Listar_SolicitudlabVO();
+
+        //jComboBox1.addItem("Seleccionar materia");
+        for (int i = 0; i < E.size(); i++) {
+            if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
+                jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
+            }
+        }
+
+        for (int i = 0; i < C.size(); i++) {
+            if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
+                if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
+
+                    //System.out.println("de la lista " + ((SolicitudlabVO) C.get(i)).getHora());
+                    String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
+                    int hora = convertirHora(horaInicio);
+                    for (int j = 0; j < E.size(); j++) {
+                        if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
+                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jCalendar1PropertyChange
+
+    public int convertirHora(String hora) {
+
+        jCalendar1.setDate(objDate);
+
+        Character d = String.valueOf(jCalendar1.getDate()).charAt(8);
+        Character i = String.valueOf(jCalendar1.getDate()).charAt(9);
+        String dia = Character.toString(d) + Character.toString(i);
+
+        ArrayList E = new ArrayList();
+        MateriaDAO dc = new MateriaDAO();
+        E = dc.Listar_MateriaVO();
+
+        ArrayList C = new ArrayList();
+        SolicitudlabDAO sl = new SolicitudlabDAO();
+        C = sl.Listar_SolicitudlabVO();
+        String convert = "";
+        int convertir = 0;
+        boolean b = false;
+        for (int j = 0; j < C.size(); j++) {
+            String DiaBdd = Character.toString(((SolicitudlabVO) C.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) C.get(j)).getFecha().charAt(9);
+            System.out.println("asdasd" + jCalendar1.getCalendar().getTime().getDate());
+            if (((SolicitudlabVO) C.get(j)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(jCalendar1.getCalendar().getTime().getDate()))) {
+
+                // String hora = ((SolicitudlabVO) C.get(j)).getHora().toString();
+                String horaTabla = "";
+                int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                if (suma < 10) {
+                    convert = "0" + suma + ":" + "00";
+                } else {
+                    convert = suma + ":" + "00";
+                }
+
+                for (int k = 0; k < 2; k++) {
+                    if (hora.charAt(k) != ':') {
+                        horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                        b = true;
+                    }
+                }
+                convertir = Integer.parseInt(horaTabla) - 8;
+            }
+            System.out.println(" convertir dasds " + convertir);
+        }
+        return convertir;
+    }
 
     /**
      * @param args the command line arguments
