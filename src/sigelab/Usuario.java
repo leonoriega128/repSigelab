@@ -77,6 +77,11 @@ public class Usuario extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Correo:");
 
@@ -178,18 +183,45 @@ public class Usuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nombre = "";
+        String apellido = "";
+        String leg = "";
+        String contra = "";
+        String rol = "";
+        String tel = "";
+        String correo = "";
         control c = new control();
-        if (c.controlar(jTextField1.getText())) {
+        if (c.controlarJText(jTextField1.getText())) {
             nombre = jTextField1.getText();
-        }else{
+        } else {
             System.out.println("error");
         }
-        String apellido = jTextField2.getText();
-        String leg = jTextField3.getText();
-        String contra = jTextField4.getText();
-        String rol = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
-        String tel = jTextField6.getText();
-        String correo = jTextField5.getText();
+        if (c.controlarJText(jTextField2.getText())) {
+            apellido = jTextField2.getText();
+        } else {
+            System.out.println("error");
+        }
+        if (c.controlarJText(jTextField3.getText())) {
+            leg = jTextField3.getText();
+        } else {
+            System.out.println("error");
+        }
+        if (c.controlarJText(jTextField4.getText())) {
+            contra = jTextField4.getText();
+        } else {
+            System.out.println("error");
+        }
+        rol = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
+
+        if (c.controlarJText(jTextField6.getText())) {
+            tel = jTextField6.getText();
+        } else {
+            System.out.println("error");
+        }
+        if (c.controlarJText(jTextField5.getText())) {
+            correo = jTextField5.getText();
+        } else {
+            System.out.println("error");
+        }
 
         UsuarioVO u = new UsuarioVO();
         u.setNombre(nombre);
@@ -207,6 +239,13 @@ public class Usuario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Usuario Cargado con exito!");
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+        this.setVisible(false);
+     
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

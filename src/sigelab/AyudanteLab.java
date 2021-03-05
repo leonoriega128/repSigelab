@@ -5,6 +5,10 @@
  */
 package sigelab;
 
+import DAO.*;
+import VO.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author Leo
@@ -17,6 +21,9 @@ public class AyudanteLab extends javax.swing.JFrame {
     public AyudanteLab() {
         initComponents();
     }
+    private String Legajo = "";
+    private String dni = "";
+    private String id = "";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +85,23 @@ public class AyudanteLab extends javax.swing.JFrame {
         });
     }
 
+    public void obtenerDatos(String leg) {
+        ArrayList E = new ArrayList();
+        AyudantelaboratorioDAO dc = new AyudantelaboratorioDAO();
+        E = dc.Listar_AyudantelaboratorioVO();
+        for (int i = 0; i < E.size(); i++) {
+            String legajo = Integer.toString(((AyudantelaboratorioVO) E.get(i)).getUsuario_Legajo());
+            if (Legajo.equalsIgnoreCase(legajo)) {
+                dni = Integer.toString(((AyudantelaboratorioVO) E.get(i)).getDNIayu());
+              // id = Integer.toString(((AyudantelaboratorioVO) E.get(i)).ge);
+            }
+        }
+    }
+
+    public void recibirLegajo(String leg) {
+        Legajo = leg;
+        System.out.println("recibiendo legajo : " + Legajo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

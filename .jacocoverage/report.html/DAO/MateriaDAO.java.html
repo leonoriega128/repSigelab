@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MateriaDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sigelab&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">DAO</a> &gt; <span class="el_source">MateriaDAO.java</span></div><h1>MateriaDAO.java</h1><pre class="source lang-java linenums">package DAO;
+
+import Conexion.Conectar;
+import VO.MateriaVO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+<span class="nc" id="L11">public class MateriaDAO{</span>
+
+/*Metodo listar*/
+    public ArrayList&lt;MateriaVO&gt; Listar_MateriaVO(){
+<span class="nc" id="L15">        ArrayList&lt;MateriaVO&gt; list = new ArrayList&lt;MateriaVO&gt;();</span>
+<span class="nc" id="L16">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L17">        String sql = &quot;SELECT * FROM materia;&quot;;</span>
+<span class="nc" id="L18">        ResultSet rs = null;</span>
+<span class="nc" id="L19">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L21">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L22">            rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L24">                MateriaVO vo = new MateriaVO();</span>
+<span class="nc" id="L25">                vo.setCodMat(rs.getObject(1));</span>
+<span class="nc" id="L26">                vo.setTipo(rs.getString(2));</span>
+<span class="nc" id="L27">                vo.setLegajo(rs.getString(3));</span>
+<span class="nc" id="L28">                vo.setNombre(rs.getString(4));</span>
+<span class="nc" id="L29">                list.add(vo);</span>
+<span class="nc" id="L30">            }</span>
+<span class="nc" id="L31">        }catch(SQLException ex){</span>
+<span class="nc" id="L32">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L33">        }catch(Exception ex){</span>
+<span class="nc" id="L34">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L36">            try{</span>
+<span class="nc" id="L37">                ps.close();</span>
+<span class="nc" id="L38">                rs.close();</span>
+<span class="nc" id="L39">                conec.desconectar();</span>
+<span class="nc" id="L40">            }catch(Exception ex){}</span>
+<span class="nc" id="L41">        }</span>
+<span class="nc" id="L42">        return list;</span>
+    }
+
+
+/*Metodo agregar*/
+    public void Agregar_MateriaVO(MateriaVO vo){
+<span class="nc" id="L48">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L49">        String sql = &quot;INSERT INTO materia (codMat, tipo, legajo, nombre) VALUES(?, ?, ?, ?);&quot;;</span>
+<span class="nc" id="L50">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L52">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L53">            ps.setObject(1, vo.getCodMat());</span>
+<span class="nc" id="L54">            ps.setString(2, vo.getTipo());</span>
+<span class="nc" id="L55">            ps.setString(3, vo.getLegajo());</span>
+<span class="nc" id="L56">            ps.setString(4, vo.getNombre());</span>
+<span class="nc" id="L57">            ps.executeUpdate();</span>
+<span class="nc" id="L58">        }catch(SQLException ex){</span>
+<span class="nc" id="L59">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L60">        }catch(Exception ex){</span>
+<span class="nc" id="L61">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L63">            try{</span>
+<span class="nc" id="L64">                ps.close();</span>
+<span class="nc" id="L65">                conec.desconectar();</span>
+<span class="nc" id="L66">            }catch(Exception ex){}</span>
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">    }</span>
+
+
+/*Metodo Modificar*/
+    public void Modificar_MateriaVO(MateriaVO vo){
+<span class="nc" id="L73">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L74">        String sql = &quot;UPDATE materia SET tipo = ?, legajo = ?, nombre = ? WHERE codMat = ?;&quot;;</span>
+<span class="nc" id="L75">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L77">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L78">            ps.setObject(1, vo.getCodMat());</span>
+<span class="nc" id="L79">            ps.setString(2, vo.getTipo());</span>
+<span class="nc" id="L80">            ps.setString(3, vo.getLegajo());</span>
+<span class="nc" id="L81">            ps.setString(4, vo.getNombre());</span>
+<span class="nc" id="L82">            ps.executeUpdate();</span>
+<span class="nc" id="L83">        }catch(SQLException ex){</span>
+<span class="nc" id="L84">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L85">        }catch(Exception ex){</span>
+<span class="nc" id="L86">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L88">            try{</span>
+<span class="nc" id="L89">                ps.close();</span>
+<span class="nc" id="L90">                conec.desconectar();</span>
+<span class="nc" id="L91">            }catch(Exception ex){}</span>
+<span class="nc" id="L92">        }</span>
+<span class="nc" id="L93">    }</span>
+
+
+/*Metodo Eliminar*/
+    public void Eliminar_MateriaVO(MateriaVO vo){
+<span class="nc" id="L98">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L99">        String sql = &quot;DELETE FROM materia WHERE codMat = ?;&quot;;</span>
+<span class="nc" id="L100">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L102">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L103">            ps.setObject(1, vo.getCodMat());</span>
+<span class="nc" id="L104">            ps.executeUpdate();</span>
+<span class="nc" id="L105">        }catch(SQLException ex){</span>
+<span class="nc" id="L106">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L107">        }catch(Exception ex){</span>
+<span class="nc" id="L108">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L110">            try{</span>
+<span class="nc" id="L111">                ps.close();</span>
+<span class="nc" id="L112">                conec.desconectar();</span>
+<span class="nc" id="L113">            }catch(Exception ex){}</span>
+<span class="nc" id="L114">        }</span>
+<span class="nc" id="L115">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

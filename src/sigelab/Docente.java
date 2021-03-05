@@ -58,7 +58,6 @@ public class Docente extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
@@ -160,18 +159,6 @@ public class Docente extends javax.swing.JFrame {
 
         jLabel4.setText("Solicitud de reserva");
 
-        jButton1.setText("Actualizar tabla");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("Solicitar Turno");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -212,16 +199,13 @@ public class Docente extends javax.swing.JFrame {
 
         jTextField1.setText(" ");
 
+        jLabel5.setForeground(new java.awt.Color(102, 102, 255));
         jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(650, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(203, 203, 203))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +215,11 @@ public class Docente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(617, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(104, 104, 104))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(67, Short.MAX_VALUE)
@@ -256,32 +244,25 @@ public class Docente extends javax.swing.JFrame {
                                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGap(33, 33, 33))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(250, 250, 250)
-                                    .addComponent(jButton1))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(13, 13, 13))))
+                            .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jComboBoxLab, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(71, 71, 71)
-                            .addComponent(jLabel4)
-                            .addGap(551, 551, 551)))
-                    .addContainerGap()))
+                            .addComponent(jLabel4)))
+                    .addGap(19, 19, 19)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
                 .addGap(109, 109, 109))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,8 +278,7 @@ public class Docente extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton1)))
+                            .addGap(38, 38, 38)))
                     .addGap(19, 19, 19)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
@@ -331,6 +311,7 @@ public class Docente extends javax.swing.JFrame {
         jTextField2.setText((convertedToString));
         convertedToString = String.valueOf(jTable2.getValueAt(seleccionados.length + inicio, 0));
         jTextField1.setText(convertedToString);
+
     }//GEN-LAST:event_jTable2MouseReleased
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -353,44 +334,6 @@ public class Docente extends javax.swing.JFrame {
     private void jCalendar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jCalendar1AncestorAdded
 
     }//GEN-LAST:event_jCalendar1AncestorAdded
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        UsuarioDAO u = new UsuarioDAO();
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            jTable2.setValueAt(null, i, 1);
-        }
-
-        ArrayList E = new ArrayList();
-        MateriaDAO dc = new MateriaDAO();
-        E = dc.Listar_MateriaVO();
-
-        ArrayList C = new ArrayList();
-        SolicitudlabDAO sl = new SolicitudlabDAO();
-        C = sl.Listar_SolicitudlabVO();
-
-        //jComboBox1.addItem("Seleccionar materia");
-        for (int i = 0; i < E.size(); i++) {
-            if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
-                jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
-            }
-        }
-
-        for (int i = 0; i < C.size(); i++) {
-            if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
-                if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
-
-                    //System.out.println("de la lista " + ((SolicitudlabVO) C.get(i)).getHora());
-                    String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
-                    int hora = convertirHora(horaInicio);
-                    for (int j = 0; j < E.size(); j++) {
-                        if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
-                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
-                        }
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_jButton1MouseClicked
 
     public boolean obtenerDia(String convertido) {
         int dia = jCalendar1.getCalendar().getTime().getDate();
@@ -441,7 +384,6 @@ public class Docente extends javax.swing.JFrame {
         boolean b = false;
         for (int x = 0; x < cantidadHorasSolc; x++) {
             String valor = Integer.toString(anio) + "-" + mes + "-" + Integer.toString(jCalendar1.getDayChooser().getDay());
-            //      System.out.println("compilado: " + valor);
             String hora = "0";
             String horafin = "0";
             for (int i = 0; i < 13; i++) {
@@ -451,7 +393,6 @@ public class Docente extends javax.swing.JFrame {
                 }
             }
             String fechaSolc = valor;
-            // System.out.println(hora);
             int[] columnass = jTable2.getSelectedColumns();
             String tipoRe = "";
             if (jRadioButton1.isSelected()) {
@@ -459,7 +400,6 @@ public class Docente extends javax.swing.JFrame {
             } else {
                 tipoRe = "Ayudantia";
             }
-            // System.out.println(String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1)));
 
             if (jTable2.getValueAt(jTable2.getSelectedRow(), 1) == null || String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1)).equalsIgnoreCase("")) {
                 if (c == 0) {
@@ -467,7 +407,6 @@ public class Docente extends javax.swing.JFrame {
                     MateriaVO mat = new MateriaVO();
                     for (int i = 0; i < a.size(); i++) {
                         if (jComboBox1.getSelectedItem().toString().equalsIgnoreCase(((MateriaVO) a.get(i)).getNombre())) {
-                            System.out.println("entra ahi");
                             slvo.setMateria_codMat((((MateriaVO) a.get(i)).getCodMat()));
                         }
                     }
@@ -493,8 +432,8 @@ public class Docente extends javax.swing.JFrame {
         if (b == true) {
             SolcLab.Agregar_SolicitudlabVO(slvo);
             jComboBoxLab.removeAllItems();
+            JOptionPane.showMessageDialog(null, "Solicitud enviada con exito", " ", JOptionPane.INFORMATION_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Solicitud enviada con exito", " ", JOptionPane.INFORMATION_MESSAGE);
 
         cantidadHorasSolc = 0;
     }//GEN-LAST:event_jButton3MouseClicked
@@ -503,7 +442,7 @@ public class Docente extends javax.swing.JFrame {
         ArrayList E = new ArrayList();
         DocenteDAO dc = new DocenteDAO();
         E = dc.Listar_DocenteVO();
-        System.out.println("necesito saber el legajo: " + Legajo);
+        //  System.out.println("necesito saber el legajo: " + Legajo);
 
         for (int i = 0; i < E.size(); i++) {
             String legajo = Integer.toString(((DocenteVO) E.get(i)).getUsuario_Legajo());
@@ -540,6 +479,7 @@ public class Docente extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         jComboBox1.removeAllItems();
+        jComboBox1.removeAll();
         ArrayList E = new ArrayList();
         MateriaDAO dc = new MateriaDAO();
         E = dc.Listar_MateriaVO();
@@ -548,7 +488,16 @@ public class Docente extends javax.swing.JFrame {
         SolicitudlabDAO sl = new SolicitudlabDAO();
         C = sl.Listar_SolicitudlabVO();
 
-        //jComboBox1.addItem("Seleccionar materia");
+        ArrayList D = new ArrayList();
+        UsuarioDAO doc = new UsuarioDAO();
+        D = doc.Listar_UsuarioVO();
+
+        for (int i = 0; i < D.size(); i++) {
+            if (Legajo.equalsIgnoreCase(String.valueOf((((UsuarioVO) D.get(i)).getLegajo())))) {
+                jLabel5.setText("Sesión en curso: " + (((UsuarioVO) D.get(i)).getNombre()).toString() + " " + (((UsuarioVO) D.get(i)).getApellido()).toString());
+            }
+        }
+
         for (int i = 0; i < E.size(); i++) {
             if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
                 jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
@@ -556,26 +505,30 @@ public class Docente extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < C.size(); i++) {
+            //if(obtenerMes(((SolicitudlabVO) C.get(i)).getFecha())){
             if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
                 if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
                     String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
+                    String horaFin = String.valueOf(((SolicitudlabVO) C.get(i)).getHoraFin());
                     int hora = convertirHora(horaInicio);
+                    int horaF = convertirHora(horaFin);
+                    int contador = horaF - hora;
                     for (int j = 0; j < E.size(); j++) {
-                        if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
-                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
+                        for (int k = 0; k < contador; k++) {
+                            if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
+                                jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora + k, 1);
+                            }
                         }
+
                     }
-                }
+                
             }
+        }
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
-        jButton1MouseClicked(evt);
+
     }//GEN-LAST:event_jCalendar1MouseClicked
 
     private void jCalendar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCalendar1KeyPressed
@@ -583,8 +536,10 @@ public class Docente extends javax.swing.JFrame {
     }//GEN-LAST:event_jCalendar1KeyPressed
 
     private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendar1PropertyChange
+        jComboBox1.removeAllItems();
         UsuarioDAO u = new UsuarioDAO();
         for (int i = 0; i < jTable2.getRowCount(); i++) {
+            jTable2.setValueAt("", i, 1);
             jTable2.setValueAt(null, i, 1);
         }
 
@@ -596,7 +551,6 @@ public class Docente extends javax.swing.JFrame {
         SolicitudlabDAO sl = new SolicitudlabDAO();
         C = sl.Listar_SolicitudlabVO();
 
-        //jComboBox1.addItem("Seleccionar materia");
         for (int i = 0; i < E.size(); i++) {
             if (Legajo.equalsIgnoreCase((((MateriaVO) E.get(i)).getLegajo()))) {
                 jComboBox1.addItem(((MateriaVO) E.get(i)).getNombre());
@@ -606,13 +560,16 @@ public class Docente extends javax.swing.JFrame {
         for (int i = 0; i < C.size(); i++) {
             if (obtenerDia(((SolicitudlabVO) C.get(i)).getFecha())) {
                 if (((SolicitudlabVO) C.get(i)).getEstadoSol().equalsIgnoreCase("aprobado")) {
-
-                    //System.out.println("de la lista " + ((SolicitudlabVO) C.get(i)).getHora());
                     String horaInicio = String.valueOf(((SolicitudlabVO) C.get(i)).getHora());
+                    String horaFin = String.valueOf(((SolicitudlabVO) C.get(i)).getHoraFin());
                     int hora = convertirHora(horaInicio);
+                    int horaF = convertirHora(horaFin);
+                    int contador = horaF - hora;
                     for (int j = 0; j < E.size(); j++) {
                         if (((SolicitudlabVO) C.get(i)).getMateria_codMat().equals(((MateriaVO) E.get(j)).getCodMat())) {
-                            jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora, 1);
+                            for (int k = 0; k < contador; k++) {
+                                jTable2.setValueAt(((MateriaVO) E.get(j)).getNombre(), hora + k, 1);
+                            }
                         }
                     }
                 }
@@ -640,7 +597,7 @@ public class Docente extends javax.swing.JFrame {
         boolean b = false;
         for (int j = 0; j < C.size(); j++) {
             String DiaBdd = Character.toString(((SolicitudlabVO) C.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) C.get(j)).getFecha().charAt(9);
-            System.out.println("asdasd" + jCalendar1.getCalendar().getTime().getDate());
+            //  System.out.println("asdasd" + jCalendar1.getCalendar().getTime().getDate());
             if (((SolicitudlabVO) C.get(j)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(jCalendar1.getCalendar().getTime().getDate()))) {
 
                 // String hora = ((SolicitudlabVO) C.get(j)).getHora().toString();
@@ -660,7 +617,6 @@ public class Docente extends javax.swing.JFrame {
                 }
                 convertir = Integer.parseInt(horaTabla) - 8;
             }
-            System.out.println(" convertir dasds " + convertir);
         }
         return convertir;
     }
@@ -701,7 +657,6 @@ public class Docente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JCalendar jCalendar1;

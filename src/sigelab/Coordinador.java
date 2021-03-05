@@ -271,27 +271,28 @@ public class Coordinador extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jRadioButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(245, 245, 245)
+                                        .addComponent(jRadioButton1)
+                                        .addGap(250, 250, 250)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(236, 236, 236)
-                                        .addComponent(jLabel1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(198, 198, 198)
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3)))))
+                                        .addComponent(jRadioButton2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(198, 198, 198)
+                                                .addComponent(jButton1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton3))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(236, 236, 236)
+                                                .addComponent(jLabel1))))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
@@ -319,23 +320,22 @@ public class Coordinador extends javax.swing.JFrame {
                             .addComponent(jCalendar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jRadioButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jRadioButton2)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1)
                                     .addComponent(jButton2)
                                     .addComponent(jButton3))))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(213, 213, 213)
@@ -347,12 +347,13 @@ public class Coordinador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
-//        jLabel1.setText("Solicitudes mismo horario");
+
         for (int i = 0; i < jTable2.getRowCount(); i++) {
             for (int j = 1; j < jTable2.getColumnCount(); j++) {
                 jTable2.setValueAt("", i, j);
             }
         }
+        int columna = 0;
         if (jRadioButton1.isSelected()) {
             jButton1.setVisible(true);
             jButton2.setVisible(true);
@@ -360,7 +361,10 @@ public class Coordinador extends javax.swing.JFrame {
 
             int valor = 0;
             String dia = "";
+
+            String convert2 = "";
             int convertir = 0;
+            int convertir2 = 0;
             ArrayList M = new ArrayList();
             MateriaDAO m = new MateriaDAO();
             M = m.Listar_MateriaVO();
@@ -383,64 +387,57 @@ public class Coordinador extends javax.swing.JFrame {
 
             boolean b = false;
             String horaTabla = "";
-
-            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay() + 1;
-            for (int z = 0; z < 5; z++) {
+            String horaTablaFin = "";
+            int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+            for (int z = 0; z < 7; z++) {
                 b = false;
                 for (int aux = 0; aux < E.size(); aux++) {
                     String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
 
                     if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
                         String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                        String horaFin = ((SolicitudlabVO) E.get(aux)).getHoraFin().toString();
                         horaTabla = "";
+                        horaTablaFin = "";
                         int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        int suma2 = Integer.parseInt(Character.toString(horaFin.charAt(0)) + Character.toString(horaFin.charAt(1))) + 3;
                         if (suma < 10) {
                             convert = "0" + suma + ":" + "00";
                         } else {
                             convert = suma + ":" + "00";
                         }
-
+                        if (suma2 < 10) {
+                            convert2 = "0" + suma2 + ":" + "00";
+                        } else {
+                            convert2 = suma2 + ":" + "00";
+                        }
                         for (int k = 0; k < 2; k++) {
                             if (hora.charAt(k) != ':') {
                                 horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                horaTablaFin = horaTablaFin + Character.toString(convert2.charAt(k));
                                 b = true;
                             }
                         }
-
                         convertir = Integer.parseInt(horaTabla) - 8;
-
+                        convertir2 = Integer.parseInt(horaTablaFin) - 8;
+                        columna = Integer.parseInt(DiaBdd) - diaup + z;
+                        int contador = convertir2 - convertir;
                         if (b) {
                             for (int k = 0; k < M.size(); k++) {
                                 if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
-                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, jCalendar1.getCalendar().getTime().getDay() + z - 1);
+                                    for (int j = 0; j < contador; j++) {
+                                        jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir + j, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
 
+                                    }
                                 }
                             }
                             b = false;
                         }
-
                     }
                 }
-
-                System.out.println(diaup);
                 diaup++;
-//                    }
-//
-//                    break;
-//                case 3:
-//                    break;
-//                case 4:
-//                    break;
-//                case 5:
-//                    break;
-//                case 6:
-//                    break;
-//            }
-
             }
         }
-
-
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -618,7 +615,7 @@ public class Coordinador extends javax.swing.JFrame {
             String horaTabla = "";
             boolean b = false;
             int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
-            //System.out.println(diaup);
+
             for (int z = 0; z < 5; z++) {
                 b = false;
                 for (int aux = 0; aux < E.size(); aux++) {
@@ -833,7 +830,6 @@ public class Coordinador extends javax.swing.JFrame {
         int jtabla = 0;
         aux2 = Integer.parseInt(dia) + jCalendar1.getDate().getDay();
         dia = Integer.toString(aux2);
-        //System.out.println("fecha de la base: " + dia);
 
         ArrayList M = new ArrayList();
         MateriaDAO ml = new MateriaDAO();
@@ -842,113 +838,110 @@ public class Coordinador extends javax.swing.JFrame {
         int row = jTable2.getSelectedRow();
         int col = jTable2.getSelectedColumn();
         if (jTable2.isRowSelected(row)) {
+            if (jTable2.isColumnSelected(col)) {
 
-            if (jRadioButton1.isSelected()) {
-                jList1.removeAll();
-                jList2.removeAll();
-                jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+                int columna = jTable2.getSelectedColumn();
+                if (jRadioButton1.isSelected()) {
+                    jList1.removeAll();
+                    jList2.removeAll();
+                    jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
 
-                for (int j = 0; j < E.size(); j++) {
-                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
-                    if (DiaBdd.charAt(0) == '0') {
-                        DiaBdd = Character.toString(DiaBdd.charAt(1));
-                    }
-                    if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
-
-                        int convertir = 0;
-                        String horaTabla = "";
-                        int columna = 0;
-                        String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
-                        horaTabla = "";
-                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
-
-                        if (suma < 10) {
-                            convert = "0" + suma + ":" + "00";
-                        } else {
-                            convert = suma + ":" + "00";
+                    for (int j = 0; j < E.size(); j++) {
+                        String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
+                        if (DiaBdd.charAt(0) == '0') {
+                            DiaBdd = Character.toString(DiaBdd.charAt(1));
                         }
+                        if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
+                            int convertir = 0;
+                            String horaTabla = "";
+                            String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
+                            horaTabla = "";
+                            int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
 
-                        for (int k = 0; k < 2; k++) {
-                            if (convert.charAt(k) != ':') {
-                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                            if (suma < 10) {
+                                convert = "0" + suma + ":" + "00";
+                            } else {
+                                convert = suma + ":" + "00";
                             }
-                        }
-                        convertir = Integer.parseInt(horaTabla) - 8;
-                        //  columna = DiaBdd - jtabla + z
-                        if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
-                            if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
 
-                                for (int i = 0; i < M.size(); i++) {
-                                    try {
-                                        if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
-                                            modelo.addElement(((MateriaVO) M.get(i)).getNombre());
-                                            modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
-                                            j++;
+                            for (int k = 0; k < 2; k++) {
+                                if (convert.charAt(k) != ':') {
+                                    horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                }
+                            }
+
+                            convertir = Integer.parseInt(horaTabla) - 8;
+                            if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
+                                if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
+                                    for (int i = 0; i < M.size(); i++) {
+                                        try {
+                                            if ((((MateriaVO) M.get(i)).getCodMat()) == (((SolicitudlabVO) E.get(j)).getMateria_codMat())) {
+                                                modelo.addElement(((MateriaVO) M.get(i)).getNombre());
+                                                modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
+                                            }
+                                        } catch (IndexOutOfBoundsException e) {
+
                                         }
-                                    } catch (IndexOutOfBoundsException e) {
-
                                     }
                                 }
                             }
                         }
                     }
+                    jList2.setModel(modelo2);
+
+                    jList1.setModel(modelo);
+
                 }
-                jList2.setModel(modelo2);
-
-                jList1.setModel(modelo);
-
-            }
-            if (jRadioButton2.isSelected()) {
-                jList2.removeAll();
-                jList1.removeAll();
-                jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
-                for (int j = 0; j < E.size(); j++) {
-                    String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
-                    if (DiaBdd.charAt(0) == '0') {
-                        DiaBdd = Character.toString(DiaBdd.charAt(1));
-                    }
-
-                    if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
-                        int convertir = 0;
-                        String horaTabla = "";
-                        String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
-                        horaTabla = "";
-                        int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
-
-                        if (suma < 10) {
-                            convert = "0" + suma + ":" + "00";
-                        } else {
-                            convert = suma + ":" + "00";
+                if (jRadioButton2.isSelected()) {
+                    jList2.removeAll();
+                    jList1.removeAll();
+                    jtabla = jTable2.getSelectedColumn() + jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
+                    for (int j = 0; j < E.size(); j++) {
+                        String DiaBdd = Character.toString(((SolicitudlabVO) E.get(j)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(j)).getFecha().charAt(9);
+                        if (DiaBdd.charAt(0) == '0') {
+                            DiaBdd = Character.toString(DiaBdd.charAt(1));
                         }
 
-                        for (int k = 0; k < 2; k++) {
-                            if (convert.charAt(k) != ':') {
-                                horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                        if (((SolicitudlabVO) E.get(j)).getEstadoSol().equalsIgnoreCase("aprobado") && DiaBdd.equalsIgnoreCase(Integer.toString(jtabla))) {
+                            int convertir = 0;
+                            String horaTabla = "";
+                            String hora = ((SolicitudlabVO) E.get(j)).getHora().toString();//rs.getString("solFechayHora");
+                            horaTabla = "";
+                            int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+
+                            if (suma < 10) {
+                                convert = "0" + suma + ":" + "00";
+                            } else {
+                                convert = suma + ":" + "00";
                             }
-                        }
-                        convertir = Integer.parseInt(horaTabla) - 8;
 
-                        if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
-                            if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
+                            for (int k = 0; k < 2; k++) {
+                                if (convert.charAt(k) != ':') {
+                                    horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                }
+                            }
+                            convertir = Integer.parseInt(horaTabla) - 8;
 
-                                for (int i = 0; i < M.size(); i++) {
-                                    try {
-                                        if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
-                                            modelo.addElement(((MateriaVO) M.get(i)).getNombre());
-                                            System.out.println("cod de solicitud : " + ((SolicitudlabVO) E.get(j)).getCodSolicitud());
-                                            modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
-                                            j++;
+                            if (Integer.toString(jtabla).equalsIgnoreCase(DiaBdd)) {
+                                if (Integer.toString(convertir).equalsIgnoreCase(Integer.toString(jTable2.getSelectedRow()))) {
+
+                                    for (int i = 0; i < M.size(); i++) {
+                                        try {
+                                            if (((MateriaVO) M.get(i)).getCodMat() == ((SolicitudlabVO) E.get(j)).getMateria_codMat()) {
+                                                modelo.addElement(((MateriaVO) M.get(i)).getNombre());
+                                                modelo2.addElement(Integer.toString(((SolicitudlabVO) E.get(j)).getCodSolicitud()));
+                                            }
+                                        } catch (IndexOutOfBoundsException e) {
+
                                         }
-                                    } catch (IndexOutOfBoundsException e) {
-
                                     }
                                 }
                             }
                         }
                     }
+                    jList2.setModel(modelo2);
+                    jList1.setModel(modelo);
                 }
-                jList2.setModel(modelo2);
-                jList1.setModel(modelo);
             }
         }
     }//GEN-LAST:event_jTable2MousePressed
@@ -1127,11 +1120,11 @@ public class Coordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        //jRadioButton1.setSelected(false);
-        // jRadioButton2.setSelected(true);
+
         int valor = 0;
         String dia = "";
         int convertir = 0;
+        int convertir2 = 0;
         ArrayList M = new ArrayList();
         MateriaDAO m = new MateriaDAO();
         M = m.Listar_MateriaVO();
@@ -1145,6 +1138,7 @@ public class Coordinador extends javax.swing.JFrame {
         jButton3.setVisible(false);
 
         String horaTabla = "";
+        String horaTablaFin = "";
         boolean b = false;
 
         jDateChooser1.setDate(objDate);
@@ -1154,6 +1148,7 @@ public class Coordinador extends javax.swing.JFrame {
 
         valor = jDateChooser1.getDate().getDay();
         String convert = "";
+        String convert2 = "";
         if (jRadioButton1.isSelected()) {
             jButton1.setVisible(true);
             jButton2.setVisible(true);
@@ -1161,33 +1156,47 @@ public class Coordinador extends javax.swing.JFrame {
 
             int columna = 0;
             int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
-            for (int z = 0; z < 5; z++) {
+            for (int z = 0; z < 7; z++) {
                 b = false;
                 for (int aux = 0; aux < E.size(); aux++) {
                     String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
 
                     if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
                         String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                        String horaFin = ((SolicitudlabVO) E.get(aux)).getHoraFin().toString();
                         horaTabla = "";
+                        horaTablaFin = "";
                         int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                        int suma2 = Integer.parseInt(Character.toString(horaFin.charAt(0)) + Character.toString(horaFin.charAt(1))) + 3;
                         if (suma < 10) {
                             convert = "0" + suma + ":" + "00";
                         } else {
                             convert = suma + ":" + "00";
                         }
+                        if (suma2 < 10) {
+                            convert2 = "0" + suma2 + ":" + "00";
+                        } else {
+                            convert2 = suma2 + ":" + "00";
+                        }
 
                         for (int k = 0; k < 2; k++) {
                             if (hora.charAt(k) != ':') {
                                 horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                horaTablaFin = horaTablaFin + Character.toString(convert2.charAt(k));
                                 b = true;
                             }
                         }
                         convertir = Integer.parseInt(horaTabla) - 8;
+                        convertir2 = Integer.parseInt(horaTablaFin) - 8;
                         columna = Integer.parseInt(DiaBdd) - diaup + z;
+                        int contador = convertir2 - convertir;
                         if (b) {
+
                             for (int k = 0; k < M.size(); k++) {
                                 if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
-                                    jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                    for (int j = 0; j < contador; j++) {
+                                        jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir + j, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                    }
                                 }
                             }
                             b = false;
@@ -1195,7 +1204,7 @@ public class Coordinador extends javax.swing.JFrame {
                     }
                 }
 
-                System.out.println(diaup);
+                //  System.out.println(diaup);
                 diaup++;
             }
         }
@@ -1296,6 +1305,7 @@ public class Coordinador extends javax.swing.JFrame {
         int valor = 0;
         String dia = "";
         int convertir = 0;
+        int convertir2 = 0;
         ArrayList M = new ArrayList();
         MateriaDAO m = new MateriaDAO();
         M = m.Listar_MateriaVO();
@@ -1309,6 +1319,7 @@ public class Coordinador extends javax.swing.JFrame {
         jButton3.setVisible(false);
 
         String horaTabla = "";
+        String horaTablaFin = "";
         boolean b = false;
         for (int i = 0; i < jTable2.getRowCount(); i++) {
             for (int j = 1; j < jTable2.getColumnCount(); j++) {
@@ -1322,6 +1333,7 @@ public class Coordinador extends javax.swing.JFrame {
 
         valor = jDateChooser1.getDate().getDay();
         String convert = "";
+        String convert2 = "";
         if (jRadioButton1.isSelected()) {
             jButton1.setVisible(true);
             jButton2.setVisible(true);
@@ -1329,7 +1341,7 @@ public class Coordinador extends javax.swing.JFrame {
 
             int columna = 0;
             int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
-            for (int z = 0; z < 5; z++) {
+            for (int z = 0; z < 7; z++) {
                 b = false;
                 for (int aux = 0; aux < E.size(); aux++) {
                     String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);
@@ -1343,26 +1355,39 @@ public class Coordinador extends javax.swing.JFrame {
                     if (obtenerMes() == Integer.parseInt(mesBdd)) {
                         if (((SolicitudlabVO) E.get(aux)).getEstadoSol().equalsIgnoreCase("pendiente") && DiaBdd.equalsIgnoreCase(Integer.toString(diaup))) {
                             String hora = ((SolicitudlabVO) E.get(aux)).getHora().toString();
+                            String horaFin = ((SolicitudlabVO) E.get(aux)).getHoraFin().toString();
                             horaTabla = "";
+                            horaTablaFin = "";
                             int suma = Integer.parseInt(Character.toString(hora.charAt(0)) + Character.toString(hora.charAt(1))) + 3;
+                            int suma2 = Integer.parseInt(Character.toString(horaFin.charAt(0)) + Character.toString(horaFin.charAt(1))) + 3;
                             if (suma < 10) {
                                 convert = "0" + suma + ":" + "00";
                             } else {
                                 convert = suma + ":" + "00";
                             }
+                            if (suma2 < 10) {
+                                convert2 = "0" + suma2 + ":" + "00";
+                            } else {
+                                convert2 = suma2 + ":" + "00";
+                            }
 
                             for (int k = 0; k < 2; k++) {
                                 if (hora.charAt(k) != ':') {
                                     horaTabla = horaTabla + Character.toString(convert.charAt(k));
+                                    horaTablaFin = horaTablaFin + Character.toString(convert2.charAt(k));
                                     b = true;
                                 }
                             }
                             convertir = Integer.parseInt(horaTabla) - 8;
+                            convertir2 = Integer.parseInt(horaTablaFin) - 8;
                             columna = Integer.parseInt(DiaBdd) - diaup + z;
+                            int contador = convertir2 - convertir;
                             if (b) {
                                 for (int k = 0; k < M.size(); k++) {
                                     if (((SolicitudlabVO) E.get(aux)).getMateria_codMat() == ((MateriaVO) M.get(k)).getCodMat()) {
-                                        jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                        for (int j = 0; j < contador; j++) {
+                                            jTable2.setValueAt(((MateriaVO) M.get(k)).getNombre(), convertir + j, columna/*jCalendar1.getCalendar().getTime().getDay() + z - 1*/);
+                                        }
                                     }
                                 }
                                 b = false;
@@ -1370,8 +1395,6 @@ public class Coordinador extends javax.swing.JFrame {
                         }
                     }
                 }
-
-                System.out.println(diaup);
                 diaup++;
             }
         }
@@ -1385,7 +1408,7 @@ public class Coordinador extends javax.swing.JFrame {
             int columna = 0;
             b = false;
             int diaup = jCalendar1.getCalendar().getTime().getDate() - jCalendar1.getCalendar().getTime().getDay();
-            for (int z = 0; z < 5; z++) {
+            for (int z = 0; z < 7; z++) {
                 b = false;
                 for (int aux = 0; aux < E.size(); aux++) {
                     String DiaBdd = Character.toString(((SolicitudlabVO) E.get(aux)).getFecha().charAt(8)) + ((SolicitudlabVO) E.get(aux)).getFecha().charAt(9);

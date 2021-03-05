@@ -48,8 +48,12 @@ public class Sigelab1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(176, 204, 51));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 0));
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +65,10 @@ public class Sigelab1 extends javax.swing.JFrame {
                 jButton1KeyPressed(evt);
             }
         });
+
+        jTextField1.setText("222");
+
+        jTextField2.setText("1234");
 
         jLabel1.setText("Legajo:");
 
@@ -132,6 +140,8 @@ public class Sigelab1 extends javax.swing.JFrame {
                         case "AyudanteL":
                             AyudanteLab ayul = new AyudanteLab();
                             ayul.setVisible(true);
+                                legajo = jTextField1.getText();
+                                
                             break;
                     }
                 }
@@ -140,8 +150,46 @@ public class Sigelab1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            UsuarioDAO U = new UsuarioDAO();
+            ArrayList E = new ArrayList();
+            String jLeg = jTextField1.getText();
+            String jPass = jTextField2.getText();
+            E = U.Listar_UsuarioVO();
+            for (int i = 0; i < E.size(); i++) {
+                String leg = Integer.toString(((UsuarioVO) E.get(i)).getLegajo());
+                String pass = (((UsuarioVO) E.get(i)).getPassword());
+                if (leg.equalsIgnoreCase(jLeg)) {
+                    if (pass.equalsIgnoreCase(jPass)) {
+                        this.setVisible(false);
+                        switch (((UsuarioVO) E.get(i)).getRol()) {
+                            case "Coordinador":
+                                Coordinador c = new Coordinador();
+                                c.setVisible(true);
+                                legajo = jTextField1.getText();
+                                break;
+                            case "docente":
+                                Docente d = new Docente();
+                                d.setVisible(true);
+                                legajo = jTextField1.getText();
+                                d.recibirLegajo(legajo);
+                                d.obtenerDatos(legajo);
+                                break;
+                            case "AyudanteL":
+                                AyudanteLab ayul = new AyudanteLab();
+                                ayul.setVisible(true);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_jButton1KeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments

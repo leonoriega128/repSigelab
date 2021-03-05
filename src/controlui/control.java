@@ -11,7 +11,7 @@ package controlui;
  */
 public class control {
 
-    public boolean controlar(String s) {
+    public boolean controlarJText(String s) {
         if (!s.isEmpty()) {
             return true;
         } else {

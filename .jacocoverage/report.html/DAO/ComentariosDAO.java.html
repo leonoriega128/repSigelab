@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ComentariosDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Sigelab&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">DAO</a> &gt; <span class="el_source">ComentariosDAO.java</span></div><h1>ComentariosDAO.java</h1><pre class="source lang-java linenums">package DAO;
+
+import Conexion.Conectar;
+import VO.ComentariosVO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+<span class="nc" id="L11">public class ComentariosDAO{</span>
+
+/*Metodo listar*/
+    public ArrayList&lt;ComentariosVO&gt; Listar_ComentariosVO(){
+<span class="nc" id="L15">        ArrayList&lt;ComentariosVO&gt; list = new ArrayList&lt;ComentariosVO&gt;();</span>
+<span class="nc" id="L16">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L17">        String sql = &quot;SELECT * FROM comentarios;&quot;;</span>
+<span class="nc" id="L18">        ResultSet rs = null;</span>
+<span class="nc" id="L19">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L21">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L22">            rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L24">                ComentariosVO vo = new ComentariosVO();</span>
+<span class="nc" id="L25">                vo.setIdComentarios(rs.getInt(1));</span>
+<span class="nc" id="L26">                vo.setCodTarea(rs.getInt(2));</span>
+<span class="nc" id="L27">                vo.setNombUsuario(rs.getString(3));</span>
+<span class="nc" id="L28">                vo.setFecha(rs.getString(4));</span>
+<span class="nc" id="L29">                vo.setHora(rs.getObject(5));</span>
+<span class="nc" id="L30">                vo.setComentario(rs.getString(6));</span>
+<span class="nc" id="L31">                vo.setAyudanteLaboratorio_DNIayu(rs.getInt(7));</span>
+<span class="nc" id="L32">                list.add(vo);</span>
+<span class="nc" id="L33">            }</span>
+<span class="nc" id="L34">        }catch(SQLException ex){</span>
+<span class="nc" id="L35">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L36">        }catch(Exception ex){</span>
+<span class="nc" id="L37">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L39">            try{</span>
+<span class="nc" id="L40">                ps.close();</span>
+<span class="nc" id="L41">                rs.close();</span>
+<span class="nc" id="L42">                conec.desconectar();</span>
+<span class="nc" id="L43">            }catch(Exception ex){}</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">        return list;</span>
+    }
+
+
+/*Metodo agregar*/
+    public void Agregar_ComentariosVO(ComentariosVO vo){
+<span class="nc" id="L51">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L52">        String sql = &quot;INSERT INTO comentarios (idComentarios, codTarea, nombUsuario, Fecha, Hora, Comentario, AyudanteLaboratorio_DNIayu) VALUES(?, ?, ?, ?, ?, ?, ?);&quot;;</span>
+<span class="nc" id="L53">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L55">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L56">            ps.setInt(1, vo.getIdComentarios());</span>
+<span class="nc" id="L57">            ps.setInt(2, vo.getCodTarea());</span>
+<span class="nc" id="L58">            ps.setString(3, vo.getNombUsuario());</span>
+<span class="nc" id="L59">            ps.setString(4, vo.getFecha());</span>
+<span class="nc" id="L60">            ps.setObject(5, vo.getHora());</span>
+<span class="nc" id="L61">            ps.setString(6, vo.getComentario());</span>
+<span class="nc" id="L62">            ps.setInt(7, vo.getAyudanteLaboratorio_DNIayu());</span>
+<span class="nc" id="L63">            ps.executeUpdate();</span>
+<span class="nc" id="L64">        }catch(SQLException ex){</span>
+<span class="nc" id="L65">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L66">        }catch(Exception ex){</span>
+<span class="nc" id="L67">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L69">            try{</span>
+<span class="nc" id="L70">                ps.close();</span>
+<span class="nc" id="L71">                conec.desconectar();</span>
+<span class="nc" id="L72">            }catch(Exception ex){}</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+
+
+/*Metodo Modificar*/
+    public void Modificar_ComentariosVO(ComentariosVO vo){
+<span class="nc" id="L79">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L80">        String sql = &quot;UPDATE comentarios SET codTarea = ?, nombUsuario = ?, Fecha = ?, Hora = ?, Comentario = ?, AyudanteLaboratorio_DNIayu = ? WHERE idComentarios = ?;&quot;;</span>
+<span class="nc" id="L81">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L83">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L84">            ps.setInt(1, vo.getIdComentarios());</span>
+<span class="nc" id="L85">            ps.setInt(2, vo.getCodTarea());</span>
+<span class="nc" id="L86">            ps.setString(3, vo.getNombUsuario());</span>
+<span class="nc" id="L87">            ps.setString(4, vo.getFecha());</span>
+<span class="nc" id="L88">            ps.setObject(5, vo.getHora());</span>
+<span class="nc" id="L89">            ps.setString(6, vo.getComentario());</span>
+<span class="nc" id="L90">            ps.setInt(7, vo.getAyudanteLaboratorio_DNIayu());</span>
+<span class="nc" id="L91">            ps.executeUpdate();</span>
+<span class="nc" id="L92">        }catch(SQLException ex){</span>
+<span class="nc" id="L93">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L94">        }catch(Exception ex){</span>
+<span class="nc" id="L95">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L97">            try{</span>
+<span class="nc" id="L98">                ps.close();</span>
+<span class="nc" id="L99">                conec.desconectar();</span>
+<span class="nc" id="L100">            }catch(Exception ex){}</span>
+<span class="nc" id="L101">        }</span>
+<span class="nc" id="L102">    }</span>
+
+
+/*Metodo Eliminar*/
+    public void Eliminar_ComentariosVO(ComentariosVO vo){
+<span class="nc" id="L107">        Conectar conec = new Conectar();</span>
+<span class="nc" id="L108">        String sql = &quot;DELETE FROM comentarios WHERE idComentarios = ?;&quot;;</span>
+<span class="nc" id="L109">        PreparedStatement ps = null;</span>
+        try{
+<span class="nc" id="L111">            ps = conec.getConnection().prepareStatement(sql);</span>
+<span class="nc" id="L112">            ps.setInt(1, vo.getIdComentarios());</span>
+<span class="nc" id="L113">            ps.executeUpdate();</span>
+<span class="nc" id="L114">        }catch(SQLException ex){</span>
+<span class="nc" id="L115">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L116">        }catch(Exception ex){</span>
+<span class="nc" id="L117">            System.out.println(ex.getMessage());</span>
+        }finally{
+<span class="nc" id="L119">            try{</span>
+<span class="nc" id="L120">                ps.close();</span>
+<span class="nc" id="L121">                conec.desconectar();</span>
+<span class="nc" id="L122">            }catch(Exception ex){}</span>
+<span class="nc" id="L123">        }</span>
+<span class="nc" id="L124">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
